@@ -1,0 +1,116 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.85rem;
+  /* Premium: Deep black + Orange Gold #FF8A00 */
+  --background: #050505;
+  --foreground: oklch(0.985 0 0);
+  --card: #0b0b0b;
+  --card-foreground: oklch(0.985 0 0);
+  --popover: #0b0b0b;
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: #FF8A00;
+  --primary-foreground: #050505;
+  --secondary: #131313;
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: #111111;
+  --muted-foreground: oklch(0.68 0.01 60);
+  --accent: #1a1a1a;
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.60 0.22 25);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: #1c1c1c;
+  --input: #141414;
+  --ring: #FF8A00;
+  --brand: #FF8A00;
+  --brand-foreground: #050505;
+
+  --chart-1: #FF8A00;
+  --chart-2: #FFB347;
+  --chart-3: #FFD27F;
+  --chart-4: #C76A00;
+  --chart-5: #8C4A00;
+}
+
+.dark { --background: #050505; --foreground: oklch(0.985 0 0); }
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html, body { background-color: #050505; color: var(--color-foreground); }
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior-y: none;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+}
+
+@utility glass {
+  background: color-mix(in oklab, #050505 78%, transparent);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+@utility gradient-brand {
+  background: linear-gradient(135deg, #FFB347 0%, #FF8A00 55%, #C76A00 100%);
+}
+
+@utility text-gold {
+  color: #FF8A00;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+/* Infinite marquee for category panels */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee-x 45s linear infinite;
+  will-change: transform;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+@keyframes panel-glow {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(255,138,0,0.10), 0 8px 32px -12px rgba(255,138,0,0.25); }
+  50% { box-shadow: 0 0 0 1px rgba(255,138,0,0.25), 0 12px 40px -10px rgba(255,138,0,0.45); }
+}
+.panel-glow { animation: panel-glow 4.5s ease-in-out infinite; }
